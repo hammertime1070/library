@@ -6,6 +6,7 @@ function Book(title, author, pageCount) {
     this.title = title;
     this.author = author;
     this.pageCount = pageCount
+    this.readBool = false
 }
 
 function addBookToLibrary(Book) {
@@ -18,7 +19,7 @@ function displayLibrary() {
     cardGrid.innerHTML = ""
     // Loop through library, displaying cards for each book
     myLibrary.forEach(book => {
-        // Create Card Elements
+        // Create Card Eleormments
         const card = document.createElement("div")
         card.classList.add("col-lg-4", "col-md-6", "col-sm-12")
 
@@ -40,15 +41,30 @@ function displayLibrary() {
         cardPageCount.classList.add("card-text")
         cardPageCount.textContent = book.pageCount
 
+        const cardReadBool = document.createElement("input")
+        cardReadBool.type = "checkbox"
+        cardReadBool.classList.add("form-check-input")
+        cardReadBool.checked = book.readBool
+        cardReadBool.addEventListener("change", () => {book.readBool = cardReadBool.checked})
+        const cardReadBoolLabel = document.createElement("label")
+        cardReadBoolLabel.classList.add("form-check-label")
+        cardReadBoolLabel.textContent = "Read?"
+        const cardReadBoolDiv = document.createElement("div")
+        cardReadBoolDiv.classList.add("form-check")
+        cardReadBoolDiv.appendChild(cardReadBool)
+        cardReadBoolDiv.appendChild(cardReadBoolLabel)
+
         const removeButton = document.createElement("button")
         removeButton.classList.add("btn", "btn-danger")
         removeButton.textContent = "Remove"
         removeButton.addEventListener("click", () => {removeBookFromLibrary(book.id)})
+    
 
         // Append content elements to card
         cardBody.appendChild(cardTitle)
         cardBody.appendChild(cardAuthor)
         cardBody.appendChild(cardPageCount)
+        cardBody.appendChild(cardReadBoolDiv)
         cardBody.appendChild(removeButton)
 
         cardInner.appendChild(cardBody)
