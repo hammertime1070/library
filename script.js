@@ -59,22 +59,20 @@ function displayLibrary() {
 
 
 function  removeBookFromLibrary(bookId) {
-    // TODO: Currently removing wrong book lol
-    // Remove from Array
-    myLibrary.splice(bookId, 1)
-    // Clear Card Grid
-    const cardGrid = document.getElementById("card-grid")
-    cardGrid.innerHTML = ""
-    // Display Card Grid again
-    displayLibrary()
-    
+    const index = myLibrary.findIndex(book => book.id === bookId)
+    if (index != -1) {
+        myLibrary.splice(index, 1)
+        const cardGrid = document.getElementById("card-grid")
+        cardGrid.innerHTML = ""
+        displayLibrary()
+    }  
 }
 
-const testBooka = new Book('test', 'test author', '100')
-const testBookb = new Book('test', 'test author', '100')
-const testBookc = new Book('test', 'test author', '100')
-const testBookd = new Book('test', 'test author', '100')
-const testBook = new Book('test', 'test author', '100')
+const testBooka = new Book('The 5 Rules of Gold', 'Ben Hogan', '100')
+const testBookb = new Book('The Lord of the Rings', 'J.R.R. Tolkein', '100')
+const testBookc = new Book('Mistborn', 'Brandon Sanderson', '100')
+const testBookd = new Book('On the Heresies', 'Saint Ignatius', '100')
+const testBook = new Book('The Wheel of Time', 'Robert Jordan', '100')
 
 addBookToLibrary(testBook)
 addBookToLibrary(testBooka)
