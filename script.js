@@ -14,7 +14,9 @@ function addBookToLibrary(Book) {
 
 function displayLibrary() {
     const cardGrid = document.getElementById("card-grid")
-
+    // Clear cards
+    cardGrid.innerHTML = ""
+    // Loop through library, displaying cards for each book
     myLibrary.forEach(book => {
         // Create Card Elements
         const card = document.createElement("div")
@@ -81,3 +83,15 @@ addBookToLibrary(testBookc)
 addBookToLibrary(testBookd)
 
 displayLibrary()
+
+const addBookForm = document.getElementById("addBookForm")
+addBookForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+    const addBookModal = document.getElementById("addBookModal")
+    const title = document.getElementById("bookTitle").value
+    const author = document.getElementById("bookAuthor").value
+    const pageCount = document.getElementById("bookPageCount").value
+    const newBook = new Book(title, author, pageCount)
+    addBookToLibrary(newBook)
+    displayLibrary()
+})
